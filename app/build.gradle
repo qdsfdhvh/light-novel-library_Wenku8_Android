@@ -1,5 +1,8 @@
-apply plugin: 'com.android.application'
-apply plugin: 'com.github.kt3k.coveralls'
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'com.github.kt3k.coveralls'
+}
 
 android {
     compileSdkVersion rootProject.targetSdkVersion
@@ -59,13 +62,15 @@ android {
         exclude 'META-INF/NOTICE.txt'
         exclude '.readme'
     }
-
     aaptOptions {
         cruncherEnabled = false
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
     }
 }
 
