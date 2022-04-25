@@ -20,15 +20,13 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.afollestad.materialdialogs.GravityEnum;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.afollestad.materialdialogs.Theme;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
-import com.nostra13.universalimageloader.core.ImageLoader;
 import com.umeng.analytics.MobclickAgent;
-
+import fr.castorflex.android.smoothprogressbar.SmoothProgressBar;
 import org.mewx.wenku8.R;
 import org.mewx.wenku8.global.GlobalConfig;
 import org.mewx.wenku8.global.api.ChapterInfo;
@@ -40,6 +38,7 @@ import org.mewx.wenku8.global.api.Wenku8API;
 import org.mewx.wenku8.global.api.Wenku8Error;
 import org.mewx.wenku8.global.api.Wenku8Parser;
 import org.mewx.wenku8.reader.activity.Wenku8ReaderActivityV1;
+import org.mewx.wenku8.util.ImageUtils;
 import org.mewx.wenku8.util.LightCache;
 import org.mewx.wenku8.util.LightNetwork;
 import org.mewx.wenku8.util.LightTool;
@@ -48,8 +47,6 @@ import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
-
-import fr.castorflex.android.smoothprogressbar.SmoothProgressBar;
 
 /**
  * Created by MewX on 2015/5/13.
@@ -90,11 +87,6 @@ public class NovelInfoActivity extends BaseMaterialActivity {
         from = getIntent().getStringExtra("from");
         title = getIntent().getStringExtra("title");
 
-        // UIL setting
-        if(ImageLoader.getInstance() == null || !ImageLoader.getInstance().isInited()) {
-            GlobalConfig.initImageLoader(this);
-        }
-
         // get views
         rlMask = findViewById(R.id.white_mask);
         mLinearLayout = findViewById(R.id.novel_info_scroll);
@@ -115,12 +107,8 @@ public class NovelInfoActivity extends BaseMaterialActivity {
 
         // hide view and set colors
         tvNovelTitle.setText(title);
-        if(LightCache.testFileExist(GlobalConfig.getFirstStoragePath() + "imgs" + File.separator + aid + ".jpg"))
-            ImageLoader.getInstance().displayImage("file://" + GlobalConfig.getFirstStoragePath() + "imgs" + File.separator + aid + ".jpg", ivNovelCover);
-        else if(LightCache.testFileExist(GlobalConfig.getSecondStoragePath() + "imgs" + File.separator + aid + ".jpg"))
-            ImageLoader.getInstance().displayImage("file://" + GlobalConfig.getSecondStoragePath() + "imgs" + File.separator + aid + ".jpg", ivNovelCover);
-        else
-            ImageLoader.getInstance().displayImage(Wenku8API.getCoverURL(aid), ivNovelCover); // move to onCreateView!
+        ImageUtils.load(ivNovelCover, Wenku8API.getCoverURL(aid));
+
         tvLatestChapterNameText.setText(getResources().getText(R.string.novel_item_latest_chapter));
         ibNovelOption.setVisibility(ImageButton.INVISIBLE);
         fabFavorite.setColorFilter(getResources().getColor(R.color.default_white), PorterDuff.Mode.SRC_ATOP);

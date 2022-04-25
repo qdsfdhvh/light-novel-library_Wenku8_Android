@@ -8,7 +8,6 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.GestureDetector;
@@ -20,18 +19,17 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import androidx.appcompat.app.AppCompatActivity;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.afollestad.materialdialogs.Theme;
-import com.nostra13.universalimageloader.core.ImageLoader;
 import com.umeng.analytics.MobclickAgent;
-
 import org.mewx.wenku8.R;
 import org.mewx.wenku8.component.ScrollViewNoFling;
 import org.mewx.wenku8.global.GlobalConfig;
 import org.mewx.wenku8.global.api.OldNovelContentParser;
 import org.mewx.wenku8.global.api.VolumeList;
 import org.mewx.wenku8.global.api.Wenku8API;
+import org.mewx.wenku8.util.ImageUtils;
 import org.mewx.wenku8.util.LightNetwork;
 
 import java.io.UnsupportedEncodingException;
@@ -74,11 +72,6 @@ public class VerticalReaderActivity extends AppCompatActivity {
         volumeList = (VolumeList) getIntent().getSerializableExtra("volume");
         cid = getIntent().getIntExtra("cid",1);
         from = getIntent().getStringExtra("from");
-
-        // UIL setting
-        if(ImageLoader.getInstance() == null || !ImageLoader.getInstance().isInited()) {
-            GlobalConfig.initImageLoader(this);
-        }
 
         // get Novel Content
         getNovelContent();
@@ -280,8 +273,7 @@ public class VerticalReaderActivity extends AppCompatActivity {
                                 .getAvailableNovolContentImagePath(imgFileName);
 
                         if (path != null) {
-                            ImageLoader.getInstance().displayImage(
-                                    "file://" + path, tempIV);
+                            ImageUtils.load(tempIV, "file://" + path);
 
                             tempIV.setOnClickListener(v -> {
                                 Intent intent = new Intent(VerticalReaderActivity.this, ViewImageDetailActivity.class);
@@ -305,8 +297,7 @@ public class VerticalReaderActivity extends AppCompatActivity {
 
                                 @Override
                                 protected void onPostExecute(final String result) {
-                                    ImageLoader.getInstance().displayImage(
-                                            "file://" + result, tempIV);
+                                    ImageUtils.load(tempIV, "file://" + result);
 
                                     tempIV.setOnClickListener(v -> {
                                         Intent intent = new Intent(VerticalReaderActivity.this, ViewImageDetailActivity.class);

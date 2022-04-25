@@ -24,16 +24,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
-
 import com.afollestad.materialdialogs.GravityEnum;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.afollestad.materialdialogs.Theme;
 import com.nononsenseapps.filepicker.FilePickerActivity;
-import com.nostra13.universalimageloader.core.ImageLoader;
 import com.umeng.analytics.MobclickAgent;
-
 import org.adw.library.widgets.discreteseekbar.DiscreteSeekBar;
 import org.mewx.wenku8.R;
 import org.mewx.wenku8.activity.BaseMaterialActivity;
@@ -101,11 +97,6 @@ public class Wenku8ReaderActivityV1 extends BaseMaterialActivity {
 
         // find views
         mSliderHolder = findViewById(R.id.slider_holder);
-
-        // UIL setting
-        if(ImageLoader.getInstance() == null || !ImageLoader.getInstance().isInited()) {
-            GlobalConfig.initImageLoader(this);
-        }
 
         // async tasks
         ContentValues cv = Wenku8API.getNovelContent(aid, cid, GlobalConfig.getCurrentLang());

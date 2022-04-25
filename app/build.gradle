@@ -9,7 +9,7 @@ android {
     buildToolsVersion rootProject.buildToolsVersion
     defaultConfig {
         applicationId "org.mewx.wenku8"
-        minSdkVersion 15
+        minSdkVersion 21
         targetSdkVersion rootProject.targetSdkVersion
         versionCode 44
         versionName "1.13"
@@ -75,9 +75,11 @@ android {
 }
 
 dependencies {
+    // new
+    implementation("io.coil-kt:coil:2.0.0-rc03")
+
     // external libraries
     implementation 'com.readystatesoftware.systembartint:systembartint:1.0.3'
-    implementation 'com.nostra13.universalimageloader:universal-image-loader:1.9.3'
     implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
     implementation 'com.getbase:floatingactionbutton:1.9.0'
     implementation 'com.makeramen:roundedimageview:2.0.1'

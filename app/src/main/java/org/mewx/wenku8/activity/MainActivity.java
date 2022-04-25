@@ -8,17 +8,13 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-
-import com.nostra13.universalimageloader.core.ImageLoader;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.commonsdk.UMConfigure;
-
 import org.mewx.wenku8.MyApp;
 import org.mewx.wenku8.R;
 import org.mewx.wenku8.async.CheckAppNewVersion;
@@ -119,11 +115,6 @@ public class MainActivity extends BaseMaterialActivity {
         super.onCreate(savedInstanceState);
         initMaterialStyle(R.layout.layout_main, HomeIndicatorStyle.HAMBURGER);
         initialApp();
-
-        // UIL setting
-        if (ImageLoader.getInstance() == null || !ImageLoader.getInstance().isInited()) {
-            GlobalConfig.initImageLoader(this);
-        }
 
         // UMeng initialization
         UMConfigure.init(MyApp.getContext(), UMConfigure.DEVICE_TYPE_PHONE, null);

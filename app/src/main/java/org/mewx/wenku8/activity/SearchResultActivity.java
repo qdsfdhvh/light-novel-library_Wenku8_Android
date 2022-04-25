@@ -5,15 +5,10 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.TextView;
-
 import androidx.fragment.app.FragmentTransaction;
-
-import com.nostra13.universalimageloader.core.ImageLoader;
 import com.umeng.analytics.MobclickAgent;
-
 import org.mewx.wenku8.R;
 import org.mewx.wenku8.fragment.NovelItemListFragment;
-import org.mewx.wenku8.global.GlobalConfig;
 
 /**
  * Created by MewX on 2015/5/11.
@@ -38,11 +33,6 @@ public class SearchResultActivity extends BaseMaterialActivity {
         Bundle bundle = new Bundle();
         bundle.putString("type", "search");
         bundle.putString("key", searchKey);
-
-        // UIL setting
-        if(ImageLoader.getInstance() == null || !ImageLoader.getInstance().isInited()) {
-            GlobalConfig.initImageLoader(this);
-        }
 
         // This code will produce more than one activity in stack, so I jump to new SearchActivity to escape it.
         getSupportFragmentManager().beginTransaction()

@@ -19,10 +19,6 @@ import android.util.Log;
 import android.util.Pair;
 import android.view.View;
 import android.widget.Toast;
-
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.assist.ImageSize;
-
 import org.mewx.wenku8.MyApp;
 import org.mewx.wenku8.R;
 import org.mewx.wenku8.activity.ViewImageDetailActivity;
@@ -668,8 +664,10 @@ public class WenkuReaderPageView extends View {
                 imgFileName = GlobalConfig.generateImageFileNameByURL(lineInfoList.get(params[0].idxLineInfo).text);
             }
 
-            ImageSize targetSize = new ImageSize(params[0].width, params[0].height); // result Bitmap will be fit to this size
-            params[0].bm = ImageLoader.getInstance().loadImageSync("file://" + GlobalConfig.getAvailableNovolContentImagePath(imgFileName), targetSize);
+            // TODO
+            // ImageSize targetSize = new ImageSize(params[0].width, params[0].height); // result Bitmap will be fit to this size
+            // params[0].bm = ImageLoader.getInstance().loadImageSync("file://" + GlobalConfig.getAvailableNovolContentImagePath(imgFileName), targetSize);
+
             int width = params[0].bm.getWidth(), height = params[0].bm.getHeight();
             if(params[0].height / (float)params[0].width > height / (float)width) {
                 // fit width

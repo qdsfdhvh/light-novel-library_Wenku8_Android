@@ -2,20 +2,12 @@ package org.mewx.wenku8.global;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Environment;
+import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import android.util.Log;
-
-import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiscCache;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
-
 import org.mewx.wenku8.MyApp;
 import org.mewx.wenku8.R;
 import org.mewx.wenku8.global.api.Wenku8API;
@@ -126,23 +118,6 @@ public class GlobalConfig {
                 currentLang = Wenku8API.LANG.SC;
         }
         return currentLang;
-    }
-
-    public static void initImageLoader(Context context) {
-        UnlimitedDiscCache localUnlimitedDiscCache = new UnlimitedDiscCache(
-                new File(GlobalConfig.getFirstStoragePath() + "cache"),
-                new File(context.getCacheDir() + File.separator + "imgs"));
-        DisplayImageOptions localDisplayImageOptions = new DisplayImageOptions.Builder()
-                .resetViewBeforeLoading(true)
-                .cacheOnDisk(true)
-                .cacheInMemory(true)
-                .bitmapConfig(Bitmap.Config.RGB_565)
-                .resetViewBeforeLoading(true)
-                .displayer(new FadeInBitmapDisplayer(250)).build();
-        ImageLoaderConfiguration localImageLoaderConfiguration = new ImageLoaderConfiguration.Builder(context)
-                .diskCache(localUnlimitedDiscCache)
-                .defaultDisplayImageOptions(localDisplayImageOptions).build();
-        ImageLoader.getInstance().init(localImageLoaderConfiguration);
     }
 
     // settings
