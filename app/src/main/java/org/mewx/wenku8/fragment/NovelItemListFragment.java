@@ -330,10 +330,11 @@ public class NovelItemListFragment extends Fragment implements MyItemClickListen
             refreshIdList();
             isLoading = false;
 
+            // TODO
             if (usingWenku8Relay) {
-                getActivity().findViewById(R.id.relay_warning).setVisibility(View.VISIBLE);
+                // getActivity().findViewById(R.id.relay_warning).setVisibility(View.VISIBLE);
             } else {
-                getActivity().findViewById(R.id.relay_warning).setVisibility(View.GONE);
+                // getActivity().findViewById(R.id.relay_warning).setVisibility(View.GONE);
             }
         }
     }
